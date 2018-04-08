@@ -3,8 +3,8 @@ import * as debug from "debug";
 import * as express from "express";
 import * as helmet from "helmet";
 
-const logDebug = debug("codingforall::debug");
-const logTrace = debug("codingforall::trace");
+const logDebug = debug("gameio::debug");
+const logTrace = debug("gameio::trace");
 
 export class App {
     public init(port: number) {
