@@ -6,12 +6,12 @@ const logTrace = debug("gameio::trace");
 
 export class App {
     public init(port: number) {
-        logTrace("init");
+        logTrace("init()");
         const server = new websocket.Server({port});
         server.on("connection", (socket, _) => {
             logDebug("New connection");
             socket.on("message", (msg) => {
-                logDebug("New message");
+                logDebug("New message: " + msg);
             });
         });
     }
