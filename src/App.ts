@@ -1,7 +1,5 @@
-import * as bodyParser from "body-parser";
 import * as debug from "debug";
-import * as express from "express";
-import * as helmet from "helmet";
+import * as websocket from "ws";
 
 const logDebug = debug("gameio::debug");
 const logTrace = debug("gameio::trace");
@@ -9,8 +7,13 @@ const logTrace = debug("gameio::trace");
 export class App {
     public init(port: number) {
         logTrace("init");
-        const server = express().use(bodyParser.json()).use(helmet());
-        server.listen(port, () => logDebug("Server is listening on port" + port));
+        const server = new websocket.Server({port});
+        server.on("connection", (socket, _) => {
+            logDebug("New connection");
+            socket.on("message", (msg) => {
+                logDebug("New message");
+            });
+        });
     }
 }
 
