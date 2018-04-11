@@ -1,14 +1,11 @@
-import * as debug from "debug";
+import * as express from "express";
+import * as logger from "./logger.js";
+import * as http from "http";
+import * as helmet from "helmet";
 
-const logDebug = debug("gameio::debug");
-const logTrace = debug("gameio::trace");
+logger.debug("Starting server...");
 
-export class App {
-    public init(port: number) {
-        logTrace("init()");
-    }
-}
-
-logDebug("Starting server...");
-const app = new App();
-app.init(5555); // TODO make this configurable
+const app = express().use(helmet());
+const server = new http.Server(app);
+// TODO put port into a config file
+app.listen(process.env.PORT || 5555, () => logger.debug("Server listening"));

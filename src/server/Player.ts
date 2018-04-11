@@ -1,11 +1,16 @@
-class Player {
+import * as logger from "./logger.js";
+
+export class Player {
     private name: string;
+    private id: string;
     private board: boolean[][];
     private xBound: number;
     private yBound: number;
 
-    constructor(name: string, xBound: number, yBound: number) {
+    constructor(name: string, id: string, xBound: number, yBound: number) {
+        logger.trace("Player constructor");
         this.name = name;
+        this.id = id;
         this.xBound = xBound;
         this.yBound = yBound;
         for (let i = 0; i < xBound; i++) {
