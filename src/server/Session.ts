@@ -18,12 +18,19 @@ class Session {
     private bindSocketEvents(socket: sio.Socket) {
         logger.trace("Session::bindSocketEvents()");
         logger.debug("Player connected");
+        const id = socket.id;
         this.createPlayer(socket.id);
+        socket.on("disconnect", this.disconnectPlayer.bind(this, socket.id));
         // TODO bind events
     }
 
     private createPlayer(id: string) {
         // TODO
         logger.trace("Session::createPlayer()");
+    }
+
+    private disconnectPlayer(id: string) {
+        // TODO
+        logger.trace("Session::disconnectUser()");
     }
 }
