@@ -1,4 +1,4 @@
-import * as logger from "./logger.js";
+import * as logger from "./Logger.js";
 
 export class Player {
     private name: string;

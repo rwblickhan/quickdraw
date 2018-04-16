@@ -1,5 +1,5 @@
 import * as http from "http";
-import * as logger from "./logger.js";
+import * as logger from "./Logger.js";
 import * as sio from "socket.io";
 import {Player} from "./Player.js";
 
