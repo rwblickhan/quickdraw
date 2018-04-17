@@ -6,6 +6,7 @@ class App extends Component {
         // TODO
         console.log("Attempting to create socket connection...");
         this.socket = io();
+        // TODO bind socket messages
     }
 }
 
