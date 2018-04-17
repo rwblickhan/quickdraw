@@ -63,4 +63,6 @@ typings/
 # .idea/ ide files
 .idea/
 
-src/server/*.js*
+server/*.js*
+webpack.config.js*
+public/*.js
