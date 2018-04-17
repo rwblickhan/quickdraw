@@ -5,7 +5,7 @@ class App extends Component {
         super(props);
         // TODO
         console.log("Attempting to create socket connection...");
-        this.socket = io();
+        this.socket = io(); // io comes from socket.io included in index.html
         // TODO bind socket messages
     }
 }
