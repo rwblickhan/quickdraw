@@ -6,4 +6,13 @@ class DisplayArea extends Component {
         super(props);
         // TODO
     }
+
+    componentDidMount() {
+        // TODO
+        this.bindSocketEvents(this.props.socket);
+    }
+
+    bindSocketEvents(socket) {
+        // TODO
+    }
 }

@@ -6,4 +6,16 @@ class DrawingArea extends Component {
         super(props);
         // TODO
     }
+
+    componentDidMount() {
+        // TODO
+        this.bindSocketEvents(this.props.socket);
+    }
+
+    bindSocketEvents(socket) {
+        document.onmousedown = function (event) {
+            // TODO determine which pixel was clicked on
+            // TODO socket.emit('draw', {x: ..., y: ...})
+        }
+    }
 }
