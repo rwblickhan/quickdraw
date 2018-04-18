@@ -4,7 +4,7 @@ import * as sio from "socket.io";
 import {Player, IPos} from "./Player.js";
 
 // represents a single session of the game
-class Session {
+export class Session {
     private players: {[index: string]: Player};
     private socket: sio.Server;
     private drawingActive: boolean;
