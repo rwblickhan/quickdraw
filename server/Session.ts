@@ -44,7 +44,7 @@ export class Session {
 
     private handleDrawEvent(id: string, pos: IPos) {
         logger.trace("Session::handleDrawEvent()");
-        if (this.drawingActive) {
+        if (id === this.activePlayer) {
             this.players[id].draw(pos);
         }
     }
