@@ -5,14 +5,17 @@ import {Player, IPos} from "./Player.js";
 
 // represents a single session of the game
 export class Session {
+    private id: string;
     private players: {[index: string]: Player};
     private socket: sio.Server;
     private drawingActive: boolean;
 
-    constructor(server: http.Server) {
+    constructor(server: http.Server, id: string) {
         logger.trace("Session::constructor()");
+        this.id = id;
         this.players = {};
         this.socket = sio(server);
+        this.socket.of("/" + this.id);
         this.socket.on("connection", this.bindSocketEvents.bind(this));
         this.drawingActive = false;
     }

@@ -21,7 +21,7 @@ app.post("/sessions", function (req, res) {
     // Create new session and redirect to get /sessions/:id for newly-created session
     if (numSessions < maxSessions) {
         const id: string = uuid();
-        sessions[id] = new Session(server);
+        sessions[id] = new Session(server, id);
         numSessions++;
         res.redirect("/sessions/" + id);
     } else {
