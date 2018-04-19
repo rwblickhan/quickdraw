@@ -17,6 +17,7 @@ const server = new http.Server(app);
 app.listen(process.env.PORT || 5555, () => logger.debug("Server listening"));
 
 app.post("/sessions", function (req, res) {
+    logger.trace("Handling POST to /sessions");
     // Create new session and redirect to get /sessions/:id for newly-created session
     if (numSessions < maxSessions) {
         const id: string = uuid();
@@ -31,6 +32,7 @@ app.post("/sessions", function (req, res) {
 
 app.get("/sessions/:id", function (req, res) {
     // TODO
+    logger.trace("Handling GET to /sessions/:id");
     // Create player and add to session if there is room
     res.status(404).end();
 });
