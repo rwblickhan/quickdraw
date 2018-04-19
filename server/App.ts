@@ -14,7 +14,7 @@ const maxSessions = 10; // TODO make this configurable
 const app = express().use(helmet()).use(express.static("public"));
 const server = new http.Server(app);
 // TODO put port into a config file
-app.listen(process.env.PORT || 5555, () => logger.debug("Server listening"));
+server.listen(process.env.PORT || 5555);
 
 app.post("/sessions", function (req, res) {
     logger.trace("Handling POST to /sessions");
@@ -34,5 +34,6 @@ app.get("/sessions/:id", function (req, res) {
     logger.trace("Handling GET to /sessions/:id");
     // Create player and add to session if there is room
     // TODO
-    res.status(404).end();
+    res.json({id: req.params.id}); // TODO remove temporary testing hack
+    // res.status(404).end();
 });

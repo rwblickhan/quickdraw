@@ -7,15 +7,14 @@ import {Player, IPos} from "./Player.js";
 export class Session {
     private id: string;
     private players: {[index: string]: Player};
-    private socket: sio.Server;
+    private socket: sio.Namespace;
     private activePlayer: string;
 
     constructor(server: http.Server, id: string) {
         logger.trace("Session::constructor()");
         this.id = id;
         this.players = {};
-        this.socket = sio(server);
-        this.socket.of("/" + this.id);
+        this.socket = sio(server).of("/" + this.id);
         this.socket.on("connection", this.bindSocketEvents.bind(this));
         this.activePlayer = ""; // "" means "no active player"
     }
@@ -23,7 +22,6 @@ export class Session {
     private bindSocketEvents(socket: sio.Socket) {
         logger.trace("Session::bindSocketEvents()");
         logger.debug("Player connected");
-        const id = socket.id;
         socket.on("register", this.createPlayer.bind(this, socket.id));
         socket.on("disconnect", this.disconnectPlayer.bind(this, socket.id));
         socket.on("draw", this.handleDrawEvent.bind(this, socket.id));
