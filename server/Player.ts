@@ -1,16 +1,16 @@
 import * as logger from "./Logger.js";
 
 export class Player {
-    private name: string;
     private id: string;
+    private name: string;
     private board: boolean[][]; // row-column order
     private xBound: number;
     private yBound: number;
 
-    constructor(name: string, id: string, xBound: number, yBound: number) {
+    constructor(id: string, name: string, xBound: number, yBound: number) {
         logger.trace("Player::constructor()");
-        this.name = name;
         this.id = id;
+        this.name = name;
         this.xBound = xBound;
         this.yBound = yBound;
         for (let i = 0; i < xBound; i++) {

@@ -8,7 +8,7 @@ export class Session {
     private id: string;
     private players: {[index: string]: Player};
     private socket: sio.Server;
-    private drawingActive: boolean;
+    private activePlayer: string;
 
     constructor(server: http.Server, id: string) {
         logger.trace("Session::constructor()");
@@ -17,22 +17,24 @@ export class Session {
         this.socket = sio(server);
         this.socket.of("/" + this.id);
         this.socket.on("connection", this.bindSocketEvents.bind(this));
-        this.drawingActive = false;
+        this.activePlayer = ""; // "" means "no active player"
     }
 
     private bindSocketEvents(socket: sio.Socket) {
         logger.trace("Session::bindSocketEvents()");
         logger.debug("Player connected");
         const id = socket.id;
-        this.createPlayer(socket.id);
+        socket.on("register", this.createPlayer.bind(this, socket.id));
         socket.on("disconnect", this.disconnectPlayer.bind(this, socket.id));
         socket.on("draw", this.handleDrawEvent.bind(this, socket.id));
         // TODO bind events
     }
 
-    private createPlayer(id: string) {
+    private createPlayer(id: string, username: string) {
         logger.trace("Session::createPlayer()");
-        // TODO
+        // TODO session size limit
+        // TODO x/y bounds for player grid in a more principled way
+        this.players[id] = new Player(id, username, 640, 640);
     }
 
     private disconnectPlayer(id: string) {
